@@ -1,0 +1,259 @@
+# Backend Setup - Guía Completa 🚀
+
+## Estructura de Carpetas
+
+```
+ase-tech10101/
+├── server.js           # Backend server
+├── package.json        # Dependencias backend
+├── .env               # API Key (crear este)
+└── public/            # Frontend files
+    ├── index.html
+    ├── style.css
+    └── script.js
+```
+
+## Paso 1: Obtener API Key
+
+1. Ve a: https://console.anthropic.com/
+2. Crea cuenta / Inicia sesión
+3. Ve a: **Settings → API Keys**
+4. Click: **Create Key**
+5. Copia la key (¡guárdala ahora!)
+
+## Paso 2: Organizar Archivos
+
+### Opción A: Estructura Nueva
+
+```bash
+# Crea carpeta del proyecto
+mkdir ase-tech10101
+cd ase-tech10101
+
+# Crea carpeta public
+mkdir public
+
+# Mueve archivos frontend a public/
+# index.html → public/index.html
+# style.css → public/style.css  
+# script.js → public/script.js
+
+# Pon archivos backend en raíz
+# server.js → ase-tech10101/server.js
+# package.json → ase-tech10101/package.json
+```
+
+### Opción B: Mantener Actual
+
+```bash
+# Si ya tienes los archivos en una carpeta:
+cd tu-carpeta-actual
+
+# Crea public y mueve archivos
+mkdir public
+mv index.html style.css script.js public/
+
+# Pon server.js y package.json en raíz
+```
+
+## Paso 3: Configurar .env
+
+Crea archivo `.env` en la raíz:
+
+```bash
+ANTHROPIC_API_KEY=sk-ant-api03-xxx-tu-key-aqui-xxx
+PORT=3000
+```
+
+**⚠️ IMPORTANTE:**
+- Reemplaza con TU key real
+- NO compartas este archivo
+- Agrégalo a `.gitignore`
+
+## Paso 4: Instalar Node.js
+
+Si no tienes Node.js:
+
+**Windows/Mac:**
+- Descarga: https://nodejs.org/
+- Instala versión LTS
+
+**Verificar instalación:**
+```bash
+node --version  # Debe mostrar v18+ o v20+
+npm --version   # Debe mostrar 9+ o 10+
+```
+
+## Paso 5: Instalar Dependencias
+
+En la carpeta raíz del proyecto:
+
+```bash
+npm install
+```
+
+Esto instala:
+- express (servidor web)
+- cors (seguridad)
+- dotenv (variables de entorno)
+
+## Paso 6: Iniciar Servidor
+
+```bash
+npm start
+```
+
+Deberías ver:
+```
+Server running on http://localhost:3000
+```
+
+## Paso 7: Probar Todo
+
+1. Abre navegador
+2. Ve a: `http://localhost:3000`
+3. Click en botón chat 🤖
+4. Escribe: "Hola"
+5. ¡Deberías recibir respuesta!
+
+## ✅ Verificación Rápida
+
+**Backend funcionando si:**
+- ✅ Servidor inicia sin errores
+- ✅ Puedes abrir http://localhost:3000
+- ✅ Chat responde mensajes
+
+**Problemas comunes:**
+- ❌ "Cannot find module" → Ejecuta `npm install`
+- ❌ "API error 401" → Verifica tu API key en .env
+- ❌ Puerto ocupado → Cambia PORT en .env
+- ❌ CORS error → Reinicia servidor
+
+## 🔧 Comandos Útiles
+
+```bash
+# Iniciar servidor
+npm start
+
+# Modo desarrollo (reinicia auto)
+npm run dev
+
+# Ver logs
+# En terminal donde corre el servidor
+
+# Detener servidor
+# Ctrl + C en terminal
+```
+
+## 📁 .gitignore
+
+Crea archivo `.gitignore`:
+
+```
+node_modules/
+.env
+*.log
+.DS_Store
+```
+
+## 🚀 Producción
+
+Para deployar:
+
+### Opción 1: Render.com (Gratis)
+
+1. Sube código a GitHub
+2. Ve a: https://render.com
+3. New → Web Service
+4. Conecta tu repo
+5. Agrega ANTHROPIC_API_KEY en Environment
+
+### Opción 2: Railway.app (Gratis)
+
+1. Ve a: https://railway.app
+2. New Project → Deploy from GitHub
+3. Agrega variables de entorno
+4. Deploy automático
+
+### Opción 3: Heroku
+
+```bash
+# Instala Heroku CLI
+# Luego:
+heroku create tu-app
+heroku config:set ANTHROPIC_API_KEY=tu-key
+git push heroku main
+```
+
+## 🔒 Seguridad
+
+**NUNCA expongas:**
+- ❌ API key en código frontend
+- ❌ Archivo .env en GitHub
+- ❌ Keys en URLs
+
+**SIEMPRE:**
+- ✅ Usa .env para secrets
+- ✅ Agrega .env a .gitignore
+- ✅ Rate limiting en producción
+
+## 💰 Costos API
+
+Claude API pricing:
+- Sonnet 4: ~$3 por millón tokens
+- Incluye input + output tokens
+- Monitorea uso en console.anthropic.com
+
+**Estimado mensual:**
+- 1000 mensajes/día = ~$10-30/mes
+- Depende de longitud de mensajes
+
+## 🎯 Testing
+
+Prueba el endpoint directamente:
+
+```bash
+curl -X POST http://localhost:3000/api/chat \
+  -H "Content-Type: application/json" \
+  -d '{
+    "messages": [{"role": "user", "content": "Hola"}],
+    "system": "Eres un asistente útil"
+  }'
+```
+
+## 📞 Soporte
+
+**Errores comunes:**
+
+1. **"ANTHROPIC_API_KEY not found"**
+   - Verifica .env existe
+   - Verifica sintaxis correcta
+   - Reinicia servidor
+
+2. **"Port already in use"**
+   - Cambia PORT en .env
+   - O mata proceso: `killall node`
+
+3. **"Cannot GET /"**
+   - Verifica carpeta public/ existe
+   - Verifica archivos en public/
+
+4. **Rate limit error**
+   - Espera un minuto
+   - Verifica créditos en Anthropic
+
+## ✨ Siguiente Nivel
+
+**Mejoras recomendadas:**
+- [ ] Rate limiting (express-rate-limit)
+- [ ] Logging (winston)
+- [ ] Error handling mejorado
+- [ ] Tests (jest)
+- [ ] Database para chat history
+- [ ] User authentication
+- [ ] WebSockets para streaming
+
+---
+
+**¿Todo funcionando?** 🎉
+¡Ya tienes tu chatbot de Claude funcionando de forma segura!

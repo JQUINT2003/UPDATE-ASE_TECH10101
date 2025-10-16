@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASE_TECH10101 - Technical Resource Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg-animation"></div>
+  <div class="grid-overlay"></div>
+  <canvas id="particles"></canvas>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <span class="logo-text">ASE_TECH<span class="logo-highlight">10101</span></span>
+      </div>
+      <ul class="nav-menu">
+        <li><a href="#about">About</a></li>
+        <li><a href="#resources">Resources</a></li>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="search-btn" id="searchBtn">Search</button>
+
+      <div class="user-menu" id="userMenu" style="display: none;">
+        <div class="user-avatar">
+          <span id="userInitials">U</span>
+        </div>
+        <div class="user-dropdown">
+          <div class="user-info">
+            <div class="user-name" id="userName">Guest</div>
+            <div class="user-email" id="userEmail">guest@example.com</div>
+          </div>
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item" id="logoutBtn">🚪 Sign Out</button>
+        </div>
+      </div>
+
+      <button class="sign-in-btn" id="signInBtn">Sign In</button>
+      <button class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container-main">
+      <div class="hero-content">
+        <div class="hero-left">
+          <h1 class="hero-title">
+            The <span class="gradient-text">Smartest Way</span> to Access<br>Technical Resources
+          </h1>
+          <p class="hero-subtitle">
+            With over 100,000+ technical guides and resources indexed since 2010, you can confidently access the information you need
+          </p>
+          <p class="hero-desc">
+            Prepare for your projects with comprehensive how-to guides specific to your technical needs
+          </p>
+
+          <div class="selection-panel">
+            <h3 class="panel-title">🎯 Find Your Resource</h3>
+            <div class="select-grid">
+              <select class="futuristic-select">
+                <option>Select Category</option>
+                <option>Web Development</option>
+                <option>Mobile Development</option>
+                <option>DevOps</option>
+                <option>Database</option>
+                <option>Security</option>
+                <option>AI Tools</option>
+                <option>Programming Language</option>
+                <option>Backend</option>
+              </select>
+              <select class="futuristic-select">
+                <option>Select Technology</option>
+                <option>React</option>
+                <option>Vue.js</option>
+                <option>Python</option>
+                <option>Docker</option>
+                <option>Node.js</option>
+                <option>MongoDB</option>
+              </select>
+              <select class="futuristic-select">
+                <option>Select Level</option>
+                <option>Beginner</option>
+                <option>Intermediate</option>
+                <option>Advanced</option>
+                <option>Expert</option>
+              </select>
+              <button class="access-btn" id="accessBtn">🚀 Access Resources</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="stat-card">
+            <div class="stat-icon">📚</div>
+            <div class="stat-number">100K+</div>
+            <div class="stat-label">Technical Guides</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🚀</div>
+            <div class="stat-number">50K+</div>
+            <div class="stat-label">Active Users</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">⚡</div>
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Availability</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="browse-section" id="about" style="background: linear-gradient(180deg, transparent 0%, rgba(255, 31, 90, 0.02) 50%, transparent 100%);">
+    <div class="container-main">
+      <h2 class="section-title">
+        About <span class="gradient-text">ASE_TECH10101</span>
+      </h2>
+      <p class="section-subtitle">Your comprehensive technical resource hub since 2010</p>
+      <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+        <p style="font-size: 1.2rem; color: var(--text-gray); line-height: 1.8;">
+          ASE_TECH10101 provides developers and engineers with organized access to over
+          <span style="color: var(--primary-red); font-weight: 700;">100,000+ technical resources</span> across
+          multiple platforms and technologies.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="browse-section" id="resources">
+    <div class="container-main">
+      <h2 class="section-title">
+        <span class="gradient-text">Browse</span> Technical Resources
+      </h2>
+      <p class="section-subtitle">
+        Select a platform and explore comprehensive guides
+      </p>
+      <div class="platform-grid" id="platformGrid"></div>
+    </div>
+  </section>
+
+  <section class="browse-section" id="tools">
+    <div class="container-main">
+      <h2 class="section-title">
+        Developer <span class="gradient-text">Tools</span>
+      </h2>
+      <p class="section-subtitle">
+        Essential tools to boost your productivity
+      </p>
+      <div class="platform-grid" id="toolsGrid"></div>
+    </div>
+  </section>
+
+  <section class="browse-section" id="blog">
+    <div class="container-main">
+      <h2 class="section-title">
+        Tech <span class="gradient-text">Blog</span> & Insights
+      </h2>
+      <p class="section-subtitle">Latest articles and community discussions</p>
+      <div id="blogPosts" class="blog-grid"></div>
+    </div>
+  </section>
+
+  <section class="browse-section">
+    <div class="container-main">
+      <h2 class="section-title">
+        What Our <span class="gradient-text">Users</span> Say
+      </h2>
+      <div class="testimonial-grid">
+        <div class="testimonial-card">
+          <div class="quote-mark">"</div>
+          <p class="testimonial-text">The guides helped me complete my project in record time!</p>
+          <div class="testimonial-author">— Alex Chen</div>
+        </div>
+        <div class="testimonial-card">
+          <div class="quote-mark">"</div>
+          <p class="testimonial-text">Organization and search functionality are top-notch.</p>
+          <div class="testimonial-author">— Sarah Martinez</div>
+        </div>
+        <div class="testimonial-card">
+          <div class="quote-mark">"</div>
+          <p class="testimonial-text">Everything I need is here — perfectly organized and fast.</p>
+          <div class="testimonial-author">— James Wilson</div>
+        </div>
+        <div class="testimonial-card">
+          <div class="quote-mark">"</div>
+          <p class="testimonial-text">As a full-stack dev, this platform is a game-changer.</p>
+          <div class="testimonial-author">— Kim Park</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer" id="contact">
+    <div class="container-main">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="logo-text">ASE_TECH<span class="logo-highlight">10101</span></div>
+          <p class="footer-tagline">Advanced Technical Resource Index</p>
+        </div>
+        <div class="footer-links">
+          <a href="#terms">Terms of Service</a>
+          <a href="#privacy">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 ASE_TECH10101. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal" id="authModal">
+    <div class="modal-content">
+      <button class="modal-close" id="authClose">&times;</button>
+
+      <div class="auth-form active" id="loginForm">
+        <h2 class="modal-title">Sign In</h2>
+        <p style="text-align: center; color: var(--text-gray); margin-bottom: 2rem;">
+          Access 100,000+ learning resources
+        </p>
+        <form id="loginFormElement">
+          <div class="input-group">
+            <label>Email Address</label>
+            <input type="email" id="loginEmail" placeholder="your@email.com" required>
+          </div>
+          <div class="input-group">
+            <label>Password</label>
+            <input type="password" id="loginPassword" placeholder="Enter password" required>
+          </div>
+          <button type="submit" class="auth-submit-btn">Sign In</button>
+        </form>
+        <p class="auth-switch">
+          Don't have an account? <a id="showSignup">Sign up here</a>
+        </p>
+      </div>
+
+      <div class="auth-form" id="signupForm">
+        <h2 class="modal-title">Create Account</h2>
+        <p style="text-align: center; color: var(--text-gray); margin-bottom: 2rem;">
+          Join thousands of developers
+        </p>
+        <form id="signupFormElement">
+          <div class="input-group">
+            <label>Full Name</label>
+            <input type="text" id="signupName" placeholder="John Doe" required>
+          </div>
+          <div class="input-group">
+            <label>Email Address</label>
+            <input type="email" id="signupEmail" placeholder="your@email.com" required>
+          </div>
+          <div class="input-group">
+            <label>Password</label>
+            <input type="password" id="signupPassword" placeholder="Min 6 characters" required minlength="6">
+          </div>
+          <button type="submit" class="auth-submit-btn">Create Account</button>
+        </form>
+        <p class="auth-switch">
+          Already have an account? <a id="showLogin">Sign in here</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="platformModal">
+    <div class="modal-content" style="max-width: 800px;">
+      <button class="modal-close" id="platformClose">&times;</button>
+      <div id="platformDetails"></div>
+    </div>
+  </div>
+
+  <div class="modal" id="blogModal">
+    <div class="modal-content" style="max-width: 900px;">
+      <button class="modal-close" id="blogClose">&times;</button>
+      <div id="blogPostContent"></div>
+    </div>
+  </div>
+
+  <!-- Claude AI Chatbot -->
+  <button class="chat-toggle" id="chatToggle" aria-label="Open AI Assistant">
+    <span class="chat-icon">🤖</span>
+  </button>
+
+  <div class="chat-container" id="chatContainer">
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <span class="chat-icon-header">🤖</span>
+        <div>
+          <div class="chat-title">ASE Tech Assistant</div>
+          <div class="chat-status">Powered by Claude AI</div>
+        </div>
+      </div>
+      <button class="chat-close" id="chatClose">&times;</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-message assistant">
+        <div class="message-avatar">🤖</div>
+        <div class="message-content">
+          Hi! I'm your ASE Tech Assistant powered by Claude AI. I can help you with:
+          <br><br>
+          • Programming questions<br>
+          • Tech career advice<br>
+          • Learning path recommendations<br>
+          • Platform comparisons<br>
+          <br>
+          How can I help you today?
+        </div>
+      </div>
+    </div>
+    <div class="chat-input-container">
+      <textarea class="chat-input" id="chatInput" placeholder="Ask me anything about tech..." rows="1"></textarea>
+      <button class="chat-send" id="chatSend">
+        <span>→</span>
+      </button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
